@@ -27,6 +27,18 @@
   color: white;
 }
 
+.expense-item__remove{
+  background-color: #40005d;
+  color: white;
+  border: 2px solid white;
+  padding: 2rem;
+  margin-left: 10rem;
+  width: 6rem;
+  max-width: 100%;
+  text-align: center;
+  box-shadow: 0 10px 8px rgba(0, 0, 0, 0.25);
+}
+
 .expense-item__price {
   font-size: 1rem;
   font-weight: bold;
@@ -49,8 +61,13 @@
     font-size: 1.25rem;
   }
 
-  .expense-item__price {
+  .expense-item__price  {
     font-size: 1.25rem;
     padding: 0.5rem 1.5rem;
   }
+  .expense-item__remove{
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
 }

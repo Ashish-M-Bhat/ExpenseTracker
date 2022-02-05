@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./Expenses.css";
-import ExpenseItems from "./ExpenseItems";
 import ExpensesFilter from "./ExpensesFilter";
 import Card from "../UI/Card";
 import ExpensesList from "./ExpensesList";
@@ -24,7 +23,7 @@ function Expenses(props) {
         onYearSelected={onYearSelected}
       />
       <ExpensesChart ExpensesFilteredByYear={ExpensesFilteredByYear} />
-      <ExpensesList ExpensesFilteredByYear={ExpensesFilteredByYear} />
+      <ExpensesList ExpensesFilteredByYear={ExpensesFilteredByYear} removeCurrentExpenseById={props.removeCurrentExpenseById}/>
     </Card>
   );
 }

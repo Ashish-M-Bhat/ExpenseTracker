@@ -1,7 +1,7 @@
 import ExpenseItems from "./ExpenseItems";
 import "./ExpensesList.css";
 
-const ExpensesList = (props) => {
+const ExpensesList = (props) => {  
   if (props.ExpensesFilteredByYear.length === 0) {
     return <h2 className="expenses-list__fallback">Nothing to display!</h2>;
   } else
@@ -11,9 +11,11 @@ const ExpensesList = (props) => {
           return (
             <ExpenseItems
               key={eachExpense.id}
+              id={eachExpense.id}
               title={eachExpense.title}
               amount={eachExpense.amount}
               date={eachExpense.date}
+              removeCurrentExpenseById={props.removeCurrentExpenseById}
             />
           );
         })}

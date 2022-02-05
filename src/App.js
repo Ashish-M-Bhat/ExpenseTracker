@@ -31,12 +31,22 @@ function App(){
      setExpenses((prevExpenses) => {
        return [expenseObject, ...prevExpenses];
      });
+  };
     
+  const removeCurrentExpenseById = (idOfExpenseToBeRemoved) => {
+    setExpenses((prevExpenses) => {
+      const findIndex = prevExpenses.findIndex(
+        (a) => a.id === idOfExpenseToBeRemoved
+      );
+      // Always finds the id though.
+      findIndex !== -1 && prevExpenses.splice(findIndex, 1);
+      return [...prevExpenses];
+    });
   };
   return (
     <>
       <NewExpense allExpenses={expenses} onAddNewExpense={onAddNewExpense} />
-      <Expenses allExpenses={expenses} />
+      <Expenses allExpenses={expenses} removeCurrentExpenseById={removeCurrentExpenseById}/>
     </>
   );
 };

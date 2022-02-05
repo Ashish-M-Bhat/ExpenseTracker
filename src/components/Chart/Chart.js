@@ -4,7 +4,7 @@ import ChartBar from "./ChartBar";
 import "./Chart.css";
 
 const Chart = (props) => {
-  const [barsPosition, setBarsPosition] = useState("Absolute");
+  const [barsPosition, setBarsPosition] = useState("Relative");
   const positioningBars = (positioningType)=> {
     setBarsPosition(positioningType);
   }
