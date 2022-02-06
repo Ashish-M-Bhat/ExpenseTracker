@@ -28,7 +28,7 @@ const NewExpense = (props) => {
     const inputObject = {
       title: enteredTitle,
       date: new Date(enteredDate),
-      amount: parseInt(enteredAmount),
+      amount: +(enteredAmount),
     };
     props.onAddNewExpense(inputObject);
     setEnteredTitle("");
@@ -63,8 +63,8 @@ const NewExpense = (props) => {
           <label>Amount</label>
           <input
             type="number"
-            min="1"
-            step="1"
+            min="0"
+            step=".1"
             value={enteredAmount}
             onChange={amountAddHandler}
           />

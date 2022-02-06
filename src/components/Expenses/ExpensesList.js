@@ -16,6 +16,7 @@ const ExpensesList = (props) => {
               amount={eachExpense.amount}
               date={eachExpense.date}
               removeCurrentExpenseById={props.removeCurrentExpenseById}
+              onEditExpense={props.onEditExpense}
             />
           );
         })}

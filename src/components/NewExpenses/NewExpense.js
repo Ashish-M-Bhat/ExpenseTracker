@@ -19,7 +19,7 @@ const NewExpense = (props) => {
   const onAddNewExpense = (expenseObject) => {
     //console.log(props.allExpenses.length)
     const newExpense = { ...expenseObject, id: newId };
-    setNewId(newId+1);
+    setNewId(newId);
     props.onAddNewExpense(newExpense);
     // When a new expense is added, the form disappears as well
     toggleForm(false);

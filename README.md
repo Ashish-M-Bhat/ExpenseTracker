@@ -86,3 +86,5 @@ New Features:
 These would need state liftng
 3. Remove expense entry
 4. Edit Expense: Title, Date, Amount
+
+Edit buttton: Form, Save, cancel, Delete
