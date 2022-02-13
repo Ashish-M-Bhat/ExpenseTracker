@@ -5,7 +5,7 @@ import "./NewExpense.css";
 const NewExpense = (props) => {
   // State to manage the forms toggle
   const [addNewExpenseButton, toggleForm] = useState(false);
-  const [newId, setNewId] = useState(props.allExpenses[props.allExpenses.length-1].id + 1);
+  const [newId, setNewId] = useState(props.allExpenses.length>0 ? props.allExpenses[props.allExpenses.length-1].id + 1 : 0);
 
   // Handlers For buttons
   const addNewExpenseButtonHandler = (event) => {

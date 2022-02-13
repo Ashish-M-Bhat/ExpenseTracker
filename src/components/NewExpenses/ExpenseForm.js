@@ -1,10 +1,12 @@
 import { useState } from "react";
 import "./ExpenseForm.css";
+import ErrorModal from "../UI/ErrorModal";
 
 const NewExpense = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
+  const [error, setError] = useState();
 
   //const [userInput, setUserInput] = {enteredTitle:'', enteredAmount: '', enteredDate:''};
 
@@ -25,21 +27,34 @@ const NewExpense = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault(); // Prevent the page from reloading on submit
-    const inputObject = {
-      title: enteredTitle,
-      date: new Date(enteredDate),
-      amount: +(enteredAmount),
-    };
-    props.onAddNewExpense(inputObject);
-    setEnteredTitle("");
-    setEnteredDate("");
-    setEnteredAmount("");
-    // console.log(enteredTitle); still shows older value since it's updated later
+    if(!enteredTitle || !enteredDate || !enteredAmount){
+      setError({
+        title:'Error!',
+        message:'Please Enter All the Fields'
+      });
+    }
+    else
+    {
+      const inputObject = {
+        title: enteredTitle,
+        date: new Date(enteredDate),
+        amount: +(enteredAmount),
+      };
+      props.onAddNewExpense(inputObject);
+      setEnteredTitle("");
+      setEnteredDate("");
+      setEnteredAmount("");
+      // console.log(enteredTitle); still shows older value since it's updated later
+    }
   };
 
+  const closeErrorModal = () =>{
+    setError(null);
+  }
   // Create a form with 3 inputs and a button
   return (
     <form onSubmit={submitHandler}>
+      {error && <ErrorModal title={error.title} message={error.message} closeErrorModal={closeErrorModal}/>}
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
