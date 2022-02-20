@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import "./App.css";
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpenses/NewExpense";
@@ -25,50 +25,44 @@ const EXPENSES = [
   },
 ];
 
-function App() {
-  const [expenses, setExpenses] = useState(EXPENSES);
+export const ACTIONS = {
+  ADD_EXPENSE: 'add-expense',
+  EDIT_EXPENSE: 'edit-expense',
+  REMOVE_EXPENSE:'remove-expense'
+};
 
-  // State Lifting from NewExpense
-  const onAddNewExpense = (expenseObject) => {
-    setExpenses((prevExpenses) => {
-      return [expenseObject, ...prevExpenses];
-    });
-  };
+const expensesReducer = (expensesState, action) =>{
+  switch(action.type)
+  {
+    case ACTIONS.ADD_EXPENSE:
+      return [action.payload.expenseObject, ...expensesState];
 
-  const removeCurrentExpenseById = (idOfExpenseToBeRemoved) => {
-    setExpenses((prevExpenses) => {
-      const findIndex = prevExpenses.findIndex(
-        (a) => a.id === idOfExpenseToBeRemoved
-      );
-      // Always finds the id though.
-      findIndex !== -1 && prevExpenses.splice(findIndex, 1);
-      return [...prevExpenses];
-    });
-  };
-
-  const onEditExpense = (expenseObject) => {
-    setExpenses((prevExpenses) => {
-      const findIndex = prevExpenses.findIndex(
-        (a) => a.id === expenseObject.id
-      );
-
-      // Always finds the id though.
-      if (findIndex !== -1) {
-        expenses[findIndex].title = expenseObject.title;
-        expenses[findIndex].date = expenseObject.date;
-        expenses[findIndex].amount = expenseObject.amount;
+    case ACTIONS.EDIT_EXPENSE:
+      const expenseObject = action.payload.expenseObject;
+      const indexOfExpenseToEdit = expensesState.findIndex(e => e.id === expenseObject.id);
+      if (indexOfExpenseToEdit !== -1) {
+        expensesState[indexOfExpenseToEdit].title = expenseObject.title;
+        expensesState[indexOfExpenseToEdit].date = expenseObject.date;
+        expensesState[indexOfExpenseToEdit].amount = expenseObject.amount;
       }
-      return [...prevExpenses];
-    });
-  };
+      return [...expensesState];
+
+    case ACTIONS.REMOVE_EXPENSE:
+      return expensesState.filter(e => e.id !== action.payload.id);
+
+    default: return expensesState;
+  }
+}
+
+function App() {
+  const [expensesState, dispatchExpenses] = useReducer(expensesReducer, EXPENSES);
 
   return (
     <>
-      <NewExpense allExpenses={expenses} onAddNewExpense={onAddNewExpense} />
+      <NewExpense allExpenses={expensesState} dispatchExpenses={dispatchExpenses}/>
       <Expenses
-        allExpenses={expenses}
-        onEditExpense={onEditExpense}
-        removeCurrentExpenseById={removeCurrentExpenseById}
+        allExpenses={expensesState}
+        dispatchExpenses={dispatchExpenses}
       />
     </>
   );

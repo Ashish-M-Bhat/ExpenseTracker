@@ -39,9 +39,8 @@ function ExpenseItems(props) {
               title={props.title}
               date={props.date}
               amount={props.amount}
-              removeCurrentExpenseById={props.removeCurrentExpenseById}
               toggleOffEditFormHandler={toggleOffEditFormHandler}
-              onEditExpense={props.onEditExpense}
+              dispatchExpenses={props.dispatchExpenses}
             />
           )
         }

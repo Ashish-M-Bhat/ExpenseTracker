@@ -23,7 +23,7 @@ function Expenses(props) {
         onYearSelected={onYearSelected}
       />
       <ExpensesChart ExpensesFilteredByYear={ExpensesFilteredByYear} />
-      <ExpensesList ExpensesFilteredByYear={ExpensesFilteredByYear} removeCurrentExpenseById={props.removeCurrentExpenseById} onEditExpense={props.onEditExpense}/>
+      <ExpensesList ExpensesFilteredByYear={ExpensesFilteredByYear} dispatchExpenses={props.dispatchExpenses}/>
     </Card>
   );
 }

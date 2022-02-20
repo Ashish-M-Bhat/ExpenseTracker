@@ -1,4 +1,5 @@
 import { useState } from "react/cjs/react.development";
+import { ACTIONS } from "../../App";
 import ExpenseForm from "./ExpenseForm";
 import "./NewExpense.css";
 
@@ -17,10 +18,9 @@ const NewExpense = (props) => {
 
   // State lifting from ExpenseForm.js
   const onAddNewExpense = (expenseObject) => {
-    //console.log(props.allExpenses.length)
     const newExpense = { ...expenseObject, id: newId };
     setNewId(newId);
-    props.onAddNewExpense(newExpense);
+    props.dispatchExpenses({type:ACTIONS.ADD_EXPENSE, payload:{expenseObject:newExpense}})
     // When a new expense is added, the form disappears as well
     toggleForm(false);
   };

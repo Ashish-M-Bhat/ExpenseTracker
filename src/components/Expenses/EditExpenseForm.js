@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ACTIONS } from "../../App";
 import "../NewExpenses/ExpenseForm.css";
 
 export default function EditExpenseForm(props) {
@@ -15,7 +16,7 @@ export default function EditExpenseForm(props) {
   // Handler for Remove Button
   const expenseRemovalButtonHandler = () => {
     const confirmExpenseRemoval = window.confirm(`Are you sure you want to remove the "${userInput.enteredTitle}"?`)
-    confirmExpenseRemoval && props.removeCurrentExpenseById(props.id);
+    confirmExpenseRemoval && props.dispatchExpenses({type:ACTIONS.REMOVE_EXPENSE, payload:{id:props.id}});
   };
 
   // Handler for Cancel Button
@@ -55,7 +56,7 @@ export default function EditExpenseForm(props) {
      };
      // Close the form and pass the data up
      props.toggleOffEditFormHandler(true);
-     props.onEditExpense(editedData);
+     props.dispatchExpenses({type:ACTIONS.EDIT_EXPENSE, payload:{expenseObject:editedData}});
      
   };
   return (
